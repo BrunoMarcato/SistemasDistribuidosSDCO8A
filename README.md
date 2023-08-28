@@ -1,1 +1,1 @@
-# Sistemas Distribídos Laboratórios
+# Sistemas Distribuídos - Laboratórios
