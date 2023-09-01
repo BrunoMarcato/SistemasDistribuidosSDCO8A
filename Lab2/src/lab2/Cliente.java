@@ -1,10 +1,10 @@
 package lab2;
 
 /**
- * Laboratorio 1 de Sistemas Distribuidos
+ * Laboratorio 2 de Sistemas Distribuidos
  * 
- * Autor: Lucio A. Rocha
- * Ultima atualizacao: 17/12/2022
+ * Autor: Bruno Uhlmann Marcato e Thomas Oliveira Rocha Sampaio Silva
+ * Ultima atualizacao: 01/09/2023
  */
 
 import java.io.BufferedReader;
