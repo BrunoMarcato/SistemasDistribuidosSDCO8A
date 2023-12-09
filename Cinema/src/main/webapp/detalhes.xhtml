@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Detalhes do Filme</title>
+    </h:head>
+    <h:body>
+        <h2>Detalhes do Filme</h2>
+        <h:panelGrid>
+            <h:outputText value="Título: #{cinemaBean.filmeSelecionado.titulo}" /><br />
+            <h:outputText value="Descrição: #{cinemaBean.filmeSelecionado.descricao}" /><br />
+            <h:outputText value="Horários disponíveis: #{cinemaBean.filmeSelecionado.horarios}" /><br />
+        </h:panelGrid>
+        <h:form>
+            <h:commandButton value="Voltar" action="#{cinemaBean.voltar}" />
+        </h:form>
+    </h:body>
+</html>
