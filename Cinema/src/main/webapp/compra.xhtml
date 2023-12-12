@@ -14,8 +14,10 @@
         <h:outputText value="Filme: #{cinemaBean.filmeSelecionado.titulo}" /><br />
 
         <h:form>
-            <h:outputText value="Horários disponíveis:" />
-            <h:inputText value="#{cinemaBean.ingresso.horario}" /><br />
+            <h:outputText value="Selecione um Horário: " />
+            <h:selectOneMenu value="#{cinemaBean.ingresso.horario}">
+                <f:selectItems value="#{cinemaBean.nomesHorariosDisponiveis}" />
+            </h:selectOneMenu><br />
 
             <h:outputText value="Selecione uma Sala: " />
             <h:selectOneMenu value="#{cinemaBean.ingresso.sala.nome}">

@@ -5,8 +5,6 @@ import br.edu.utfpr.cinema.model.Ingresso;
 import br.edu.utfpr.cinema.model.Sala;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.locks.ReentrantLock;
 import javax.ejb.Stateless;
 
 @Stateless
@@ -14,7 +12,6 @@ public class CinemaWebServiceImpl implements CinemaWebService {
 
     private List<Filme> filmes;
     private List<Sala> salas;
-    private static final ConcurrentHashMap<String, ReentrantLock> cadeiraLocks = new ConcurrentHashMap<>();
 
     public CinemaWebServiceImpl() {
         criarListaFilmes();
@@ -35,8 +32,18 @@ public class CinemaWebServiceImpl implements CinemaWebService {
 
         filmes.add(new Filme(1, "Jogos Vorazes", "Num futuro distante, boa parte da população é controlada por um regime totalitário, "
                 + "que relembra esse domínio realizando um evento anual - e mortal - entre os 12 distritos sob sua tutela.", "9h, 17h, 21h"));
-        filmes.add(new Filme(2, "Filme 2", "Descrição do filme 2", "10h, 16h, 22h"));
-        filmes.add(new Filme(3, "Filme 3", "Descrição do filme 3", "11h, 18h, 23h"));
+        filmes.add(new Filme(2, "Poderoso Chefão", "Uma família mafiosa luta para estabelecer sua supremacia nos Estados Unidos depois da Segunda Guerra Mundial. "
+                + "Uma tentativa de assassinato deixa o chefão Vito Corleone incapacitado e força os filhos Michael e Sonny a assumir os negócios.", "10h, 16h, 22h"));
+        filmes.add(new Filme(3, "Star Wars IV", "A princesa Leia é mantida refém pelas forças imperiais comandadas por Darth Vader. "
+                + "Luke Skywalker e o capitão Han Solo precisam libertá-la e restaurar a liberdade e a justiça na galáxia.", "11h, 18h, 23h"));
+    }
+    
+    public String [] getHorarios(Filme filme) {
+        String [] horarios;
+        
+        horarios = filme.getHorarios().split(", ");
+        
+        return horarios;
     }
 
     @Override

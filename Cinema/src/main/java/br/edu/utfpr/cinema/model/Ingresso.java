@@ -1,7 +1,6 @@
 package br.edu.utfpr.cinema.model;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 public class Ingresso implements Serializable {
     
@@ -15,7 +14,6 @@ public class Ingresso implements Serializable {
     private String transactionId;
     
     public Ingresso() {
-        this.transactionId = UUID.randomUUID().toString();
         this.setPreco(10);
     }
 

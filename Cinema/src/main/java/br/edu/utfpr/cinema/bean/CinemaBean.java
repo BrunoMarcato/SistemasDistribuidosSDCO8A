@@ -9,7 +9,6 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.locks.Lock;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 
@@ -23,8 +22,6 @@ public class CinemaBean implements Serializable {
     private List<Filme> filmes;
     private Filme filmeSelecionado;
     private Ingresso ingresso;
-    Sala sala;
-    Lock salaLock;
 
     @PostConstruct
     public void init() {
@@ -52,30 +49,12 @@ public class CinemaBean implements Serializable {
     }
 
     public String Comprar() {
-        Sala sala = this.ingresso.getSala();
-        Lock salaLock = sala.getSalaLock();
-
-        if (salaLock.tryLock()) {
-            try {
-                System.out.println("Tranca adquirida");
-                cinemaWebService.realizarCompra(this.filmeSelecionado, this.ingresso);
-                return "confirmarCompra.xhtml?faces-redirect=true";
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-        } else {
-            System.out.println("Não foi possivel adquirir a tranca");
-            return "compraNaoFeita.xhtml?faces-redirect=true";
-        }
+        cinemaWebService.realizarCompra(this.filmeSelecionado, this.ingresso);
+        return "confirmarCompra.xhtml?faces-redirect=true";
     }
 
     public String confirmarCompra() {
         cinemaWebService.marcarIngressoComoIndisponivel(this.filmeSelecionado, this.ingresso);
-
-        // Libera o lock da sala após a confirmação da compra
-        salaLock.unlock();
-        System.out.println("Lock da sala liberado");
 
         return this.voltar();
     }
@@ -96,6 +75,12 @@ public class CinemaBean implements Serializable {
         }
 
         return listaNomes;
+    }
+    
+    public String [] getNomesHorariosDisponiveis() {
+        String [] listaHorarios = cinemaWebService.getHorarios(filmeSelecionado);
+        
+        return listaHorarios;
     }
 
     public List<String> getNomeFileiras() {

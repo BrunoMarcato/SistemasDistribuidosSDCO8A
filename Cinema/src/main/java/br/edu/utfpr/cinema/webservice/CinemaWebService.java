@@ -27,4 +27,7 @@ public interface CinemaWebService {
     
     @WebMethod
     public List<Sala> obterSalasDisponiveisParaFilme(Filme filme);
+    
+    @WebMethod
+    public String[] getHorarios(Filme filmeSelecionado);
 }
